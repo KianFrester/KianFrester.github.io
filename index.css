@@ -1,0 +1,134 @@
+body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #ffd6e0;
+        font-family: "Comic Sans MS", "Poppins", cursive;
+        overflow: hidden;
+      }
+
+      .card {
+        background: white;
+        width: 320px;
+        padding: 30px 20px 40px;
+        border-radius: 20px;
+        text-align: center;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        position: relative;
+        z-index: 2;
+      }
+
+      h1 {
+        color: #ff4d6d;
+        margin-bottom: 15px;
+      }
+
+      img {
+        width: 150px;
+        margin-bottom: 15px;
+      }
+
+      p {
+        font-size: 18px;
+        margin-bottom: 25px;
+        color: #555;
+      }
+
+      /* Center both buttons at start */
+      .buttons {
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+        position: relative;
+        height: 60px;
+      }
+
+      button {
+        border: none;
+        padding: 10px 22px;
+        border-radius: 20px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: transform 0.15s ease;
+        touch-action: manipulation;
+      }
+
+      .yes {
+        background: #2ecc71;
+        color: white;
+        position: relative;
+        z-index: 3;
+      }
+
+      /* NO starts centered, then becomes fixed when it runs away */
+      .no {
+        background: #e74c3c;
+        color: white;
+        position: relative;
+        z-index: 4;
+      }
+
+      .main {
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        background: #ffd6e0;
+        text-align: center;
+        padding: 20px;
+      }
+
+      .main h1 {
+        margin: 0 0 10px;
+        color: #ff4d6d;
+        font-size: 42px;
+      }
+
+      .main p {
+        margin: 6px 0;
+        font-size: 18px;
+        color: #555;
+      }
+
+      .heroText{
+  position: fixed;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 999;
+
+  background: rgba(224, 216, 216, 0.55);
+  border: 1px solid rgba(255,255,255,0.18);
+  padding: 14px 16px;
+  border-radius: 18px;
+  backdrop-filter: blur(6px);
+}
+
+
+.mainBg{
+  position: fixed;
+  inset: 0;                    /* top:0; right:0; bottom:0; left:0 */
+  background-image: url("assets/ab892533-018c-403b-b674-8efe13628c2d.jpg");
+  background-size: cover;      /* ✅ responsive, keeps aspect ratio */
+  background-position: center; /* ✅ keeps focus centered */
+  background-repeat: no-repeat;
+  z-index: -2;
+}
+
+/* Optional overlay for readability */
+.mainBg::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.55),
+    rgba(0,0,0,0.20),
+    rgba(0,0,0,0.10)
+  );
+}
