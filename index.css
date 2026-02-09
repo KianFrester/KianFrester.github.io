@@ -4,7 +4,7 @@ body {
         display: flex;
         align-items: center;
         justify-content: center;
-        background: #ffd6e0;
+        background: #f3b0f2;
         font-family: "Comic Sans MS", "Poppins", cursive;
         overflow: hidden;
       }
@@ -95,6 +95,7 @@ body {
       }
 
       .heroText{
+        color: white;
   position: fixed;
   top: 18px;
   left: 50%;
@@ -102,7 +103,7 @@ body {
   text-align: center;
   z-index: 999;
 
-  background: rgba(224, 216, 216, 0.55);
+  background: rgba(249, 183, 226, 0.55);
   border: 1px solid rgba(255,255,255,0.18);
   padding: 14px 16px;
   border-radius: 18px;

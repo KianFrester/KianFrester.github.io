@@ -10,8 +10,8 @@ function yesClick() {
   <div class="mainBg"></div>
 
   <div class="heroText">
-    <div class="title">HAHAHHAHAHAA kilig ako 🥰💕</div>
-    <div class="sub">wala ng bawian yan ah haha</div>
+    <div class="title">HAHAHHAHAHAA kakakilig 🥰💕</div>
+    <div class="sub">wala ng bawian yan ah hahahaha🤣🤣🤣</div>
     <div class="small">🎶 Tahanan by: El Manu</div>
   </div>
 `;
