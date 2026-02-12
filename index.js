@@ -1,27 +1,4 @@
-function yesClick() {
-  const music = document.getElementById("bgMusic");
-
-  // 🎵 Play music (user gesture = allowed on mobile)
-  fadeInMusic(music, 0.5, 2500);
-  music.play().catch(() => {});
-
-  // Go to "main page" view
-  document.body.innerHTML = `
-  <div class="mainBg"></div>
-
-  <div class="heroText">
-    <div class="title">HAHAHHAHAHAA kakakilig 🥰💕</div>
-    <div class="sub">wala ng bawian yan ah hahahaha🤣🤣🤣</div>
-    <div class="small">🎶 Tahanan by: El Manu</div>
-  </div>
-`;
-
-  // IMPORTANT: re-attach the audio element to the new body
-  document.body.appendChild(music);
-}
-
 function rectsOverlap(a, b, gap = 10) {
-  // gap = extra safe space so they don't touch
   return !(
     a.right + gap < b.left ||
     a.left > b.right + gap ||
@@ -30,16 +7,65 @@ function rectsOverlap(a, b, gap = 10) {
   );
 }
 
+function fadeInVideoSound(video, targetVolume = 1, duration = 2500) {
+  video.volume = 0;
+  const steps = 30;
+  const stepTime = duration / steps;
+  let currentStep = 0;
+
+  const fade = setInterval(() => {
+    currentStep++;
+    video.volume = Math.min(
+      targetVolume,
+      (targetVolume / steps) * currentStep
+    );
+
+    if (currentStep >= steps) {
+      clearInterval(fade);
+      video.volume = targetVolume;
+    }
+  }, stepTime);
+}
+
+function yesClick() {
+  document.body.innerHTML = `
+    <div class="videoWrapper">
+      <video
+        id="loveVideo"
+        class="fullVideo"
+        src="video/lv_7256694716505378049_20260212172752.mp4"
+        playsinline
+      ></video>
+
+      <div class="overlayText">
+        <div class="title">HAHAHAHA kakakilig 🥰💕</div>
+        <img class="overlayGif" src="assets/Qoobee Sticker by Inlove.gif" alt="cute cat" />
+        <div class="sub">wala ng bawian yan ah hahahaha🤣</div>
+      </div>
+    </div>
+  `;
+
+  const video = document.getElementById("loveVideo");
+
+  video.muted = false;
+  video.volume = 0;
+
+  video.play().then(() => {
+    fadeInVideoSound(video, 1, 3000);
+  }).catch(() => {
+    // if autoplay fails (rare in this method), try again
+    video.muted = false;
+    video.play();
+  });
+}
+
 function moveNo() {
-  // 📳 Vibrate (if supported)
   if (navigator.vibrate) navigator.vibrate([60, 40, 60]);
 
   const noBtn = document.getElementById("noBtn");
   const yesBtn = document.getElementById("yesBtn");
 
-  // First time it runs: detach from layout and allow roaming
   noBtn.style.position = "fixed";
-  noBtn.style.transform = "none";
 
   const tries = 80;
   const margin = 8;
@@ -57,30 +83,9 @@ function moveNo() {
     const noRect = noBtn.getBoundingClientRect();
     const yesRect = yesBtn.getBoundingClientRect();
 
-    // accept only if it doesn't overlap YES
     if (!rectsOverlap(noRect, yesRect, 14)) return;
   }
-
-  // fallback: bottom-right-ish
-  noBtn.style.left = `${Math.max(margin, window.innerWidth - noW - margin)}px`;
-  noBtn.style.top = `${Math.max(margin, window.innerHeight - noH - margin)}px`;
 }
 
-function fadeInMusic(audio, targetVolume = 0.6, duration = 2000) {
-  audio.volume = 0;
-  audio.play().catch(() => {});
-
-  const steps = 30;
-  const stepTime = duration / steps;
-  let currentStep = 0;
-
-  const fade = setInterval(() => {
-    currentStep++;
-    audio.volume = Math.min(targetVolume, (targetVolume / steps) * currentStep);
-
-    if (currentStep >= steps) {
-      clearInterval(fade);
-      audio.volume = targetVolume;
-    }
-  }, stepTime);
-}
+document.getElementById("yesBtn").addEventListener("click", yesClick);
+document.getElementById("noBtn").addEventListener("click", moveNo);
